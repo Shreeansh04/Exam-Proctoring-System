@@ -1,5 +1,5 @@
 #P(features | cheat) = ( P(cheat | features)* P(features)) / P(cheat) - for training
-#P(cheat | features) = ( P(features | cheat)* P(cheat)) / P(features) - for testing/real time
+
 
 import numpy as np
 import pandas as pd
@@ -35,16 +35,32 @@ for feature_combination in set(feature_combinations):
 
 # Calculate P(features|cheat)
 p_features_given_cheat = {}
+p_features_given_non_cheat = {}
 
 for feature_combination in set(feature_combinations):
     p_features_given_cheat[feature_combination] = (p_cheat_given_features[feature_combination] * p_cheat) / (
         p_cheat_given_features[feature_combination] * p_cheat + p_cheat_given_non_features[feature_combination] * (1 - p_cheat))
+    p_features_given_non_cheat[feature_combination] = (p_cheat_given_non_features[feature_combination] * (1 - p_cheat)) / (
+        p_cheat_given_non_features[feature_combination] * (1 - p_cheat) + p_cheat_given_features[feature_combination] * p_cheat)
 
 # Print the calculated probabilities
 print("P(features|cheat):")
 for feature_values, probability in p_features_given_cheat.items():
     print(f"{feature_values}: {probability:.4f}")
 
+print("\nP(features|~cheat):")
+for feature_values, probability in p_features_given_non_cheat.items():
+    print(f"{feature_values}: {probability:.4f}")
+
+#outpput:P(features|cheat):
+# (1, 0, 1): 1.0000
+# (1, 1, 0): 1.0000
+# (0, 1, 0): 0.9999
+# (0, 0, 0): 0.9999
+# (1, 0, 0): 1.0000
+# (0, 0, 1): 1.0000
+# (1, 1, 1): 1.0000
+# (0, 1, 1): 1.0000
 
 
 

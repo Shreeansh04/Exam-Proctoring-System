@@ -14,11 +14,6 @@ with open('gaussian_nb_model.pkl', 'rb') as f:
 # Initialize the DataFrame
 df = pd.DataFrame(columns=['Timestamp', 'X_AXIS_CHEAT', 'Y_AXIS_CHEAT', 'Audio_Cheat','Emotion'])
 
-# Initialize the plot
-
-
-# Initialize an empty list to store dB values
-
 
 # Open the webcam
 cap = cv2.VideoCapture(0)
@@ -82,5 +77,6 @@ cv2.destroyAllWindows()
 
 # Save the DataFrame to a CSV file
 df.to_csv('head_pose_emotion_detection.csv', index=False)
+
 
 
