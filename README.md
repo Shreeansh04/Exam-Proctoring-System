@@ -1,1 +1,1 @@
-AI-powered Exam Proctoring system with an essence of therapist vibes
+AI-powered Exam Proctoring system with head-pose, audio,and emotion detection. 
